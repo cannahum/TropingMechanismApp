@@ -1,0 +1,11 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="main">Troping Mechanism</a>
+    </div>
+    <ul class="nav nabar-nav">
+      <li class="active"><a ui-sref="main">Search</a></li>
+      <li><a ui-sref="advanced">Advanced Search</a></li>
+    </ul>
+  </div>
+</nav>
