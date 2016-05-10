@@ -55,26 +55,66 @@ app.config( function($stateProvider, $urlRouterProvider) {
 		    return d.promise;
 		}
 	    }
+	}).
+	state('main.detail', {
+	    url: "/detail/:param.title",
+	    views: {
+		"menuContent": {
+		    templateUrl: static_url + "angular/html/detail.html",
+		    controller: "detailController"
+		}
+	    },
+	    resolve: {
+		obj : function($stateParams) {
+		    console.log($stateParams.param);
+		    return $stateParams.param;
+		}
+	    }
 	});
 });
 
-app. controller('resultsController', function($scope, $stateParams, results) {
-    $scope.results = results;
 
-    for (var key in $scope.results) {
-	$scope.results[key].fullText = false;
-    };
+app.controller('detailController', function($scope, obj) {
+    $scope.obj = obj;
+
+    console.log(obj);
+
+});
+
+app.controller('resultsController', function($scope, $stateParams, $state, results) {
+    $scope.results = results.map(function(r) {
+	console.log(r);
+	r.fullText = false;
+	return r;
+    });
 
     console.log($scope.results);
     $scope.searchQuery = $stateParams.param;
     $scope.charLimit = 200;
     $scope.readMore = function(i) {
-	console.log('hey' + i);
 	current = $scope.results[i].fullText;
 	$scope.results[i].fullText = !current;
     };
-    
-     
+
+    $scope.tropes = true;
+    $scope.media = true;
+
+    $scope.filterBy = function(result) {
+	return((result.type === "media" && $scope.media)||
+	       (result.type === "trope" && $scope.tropes));
+    };
+
+    $scope.goTo = function(title) {
+	console.log(title);
+	obj = {};
+	for (var i = 0; i < $scope.results.length; i++) {
+	    if ($scope.results[i].title == title) {
+		obj = $scope.results[i];
+		break;
+	    };
+	};
+	$state.go('main.detail', {param:obj});
+    };
 });
 
 

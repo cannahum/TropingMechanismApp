@@ -3,9 +3,13 @@ from django.conf import settings
 from django.http import HttpResponse
 import json
 import os
+import shelve
 
 with open(os.path.join(settings.PROJECT_ROOT, 'corpus.json')) as json_file:
     json_data = json.load(json_file)
+
+shelf = shelve.open(os.path.join(settings.PROJECT_ROOT, 'ds'))
+print(type(shelf))
 
 
 def home(req):
