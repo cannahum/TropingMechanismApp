@@ -57,7 +57,7 @@ app.config( function($stateProvider, $urlRouterProvider) {
 	    }
 	}).
 	state('main.detail', {
-	    url: "/detail/:param.title",
+	    url: "/detail/:title",
 	    views: {
 		"menuContent": {
 		    templateUrl: static_url + "angular/html/detail.html",
@@ -65,9 +65,8 @@ app.config( function($stateProvider, $urlRouterProvider) {
 		}
 	    },
 	    resolve: {
-		obj : function($stateParams) {
-		    console.log($stateParams.param);
-		    return $stateParams.param;
+		obj : function(DataTransferService){
+		    return DataTransferService.retrieve();
 		}
 	    }
 	});
@@ -76,14 +75,13 @@ app.config( function($stateProvider, $urlRouterProvider) {
 
 app.controller('detailController', function($scope, obj) {
     $scope.obj = obj;
-
+    $scope.oneAtATime = true;
     console.log(obj);
 
 });
 
-app.controller('resultsController', function($scope, $stateParams, $state, results) {
+app.controller('resultsController', function($scope, $stateParams, $state, DataTransferService, results) {
     $scope.results = results.map(function(r) {
-	console.log(r);
 	r.fullText = false;
 	return r;
     });
@@ -113,7 +111,8 @@ app.controller('resultsController', function($scope, $stateParams, $state, resul
 		break;
 	    };
 	};
-	$state.go('main.detail', {param:obj});
+	DataTransferService.cache(obj);
+	$state.go('main.detail', {title:obj.title});
     };
 });
 
@@ -190,8 +189,24 @@ app.controller('carouselController', function($scope) {
     }
 });
 
-app.controller('controller1', function($scope) {
-    $scope.description = "Hey there, what are we doing here?";
+
+app.factory('DataTransferService', function($q) {
+    holdingOnto = '';
+
+    setData = function(obj) {
+	holdingOnto = obj;
+    };
+
+    getData = function() {
+	console.log('retrieving');
+	console.log(holdingOnto);
+	return holdingOnto;
+    };
+
+    return {
+	cache : setData,
+	retrieve : getData
+    };
 });
 
 
