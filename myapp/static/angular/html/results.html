@@ -1,3 +1,13 @@
-<div>
-  Hello world
+<div class="container-fluid">
+  <h1>Search Results for [[searchQuery]]</h1>
+  <h2>Click on something</h2>
+  <div class="well well-lg">
+    <ol>
+      <li ng-repeat="result in results track by $index">
+	<h3>[[result.title]]</h3>
+	<p ng-if="!result.fullText">[[result.text | limitTo:charLimit]]...<a href="" ng-click="readMore($index)">Read More</a></p>
+	<p ng-if="result.fullText">[[result.text]]<a href="" ng-click="readMore($index)">Read Less</a></p>
+      </li>
+    </ol>
+  </div>
 </div>

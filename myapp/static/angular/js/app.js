@@ -58,9 +58,23 @@ app.config( function($stateProvider, $urlRouterProvider) {
 	});
 });
 
-app. controller('resultsController', function($scope, results) {
+app. controller('resultsController', function($scope, $stateParams, results) {
     $scope.results = results;
-    console.log(results);
+
+    for (var key in $scope.results) {
+	$scope.results[key].fullText = false;
+    };
+
+    console.log($scope.results);
+    $scope.searchQuery = $stateParams.param;
+    $scope.charLimit = 200;
+    $scope.readMore = function(i) {
+	console.log('hey' + i);
+	current = $scope.results[i].fullText;
+	$scope.results[i].fullText = !current;
+    };
+    
+     
 });
 
 
