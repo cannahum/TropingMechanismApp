@@ -34,8 +34,37 @@ app.config( function($stateProvider, $urlRouterProvider) {
 		    controller: 'advancedController'
 		}
 	    }
+	}).
+	state('main.results', {
+	    url: "/search_results/:param",
+	    views: {
+		"menuContent": {
+		    templateUrl: static_url + "angular/html/results.html",
+		    controller: 'resultsController'
+		}
+	    },
+	    resolve: {
+		results : function(ApiService, $stateParams, $q) {
+		    var d = $q.defer();
+		    console.log('hellooooo');
+		    console.log($stateParams.param);
+		    ApiService.simpleSearch({'simple_search': $stateParams.param})
+			.then(function(data) {
+			    d.resolve(data);
+			}).catch(function(err) {
+			    d.reject(error);
+			});
+		    return d.promise;
+		}
+	    }
 	});
 });
+
+app. controller('resultsController', function($scope, $stateParams) {
+    console.log('hey!');
+    console.log($stateParams.param);
+});
+
 
 app.controller('mainController', function($scope) {
     $scope.navCollapsed = true;
@@ -45,10 +74,7 @@ app.controller('searchController', function($scope, $state, $q, ApiService) {
     $scope.search = "";
     $scope.makeQuery = function(search) {
 	console.log('ok making  a query now!');
-	ApiService.simpleSearch({'simple_search': search})
-	    .then(function(data) {
-		console.log(data);
-	    });
+	$state.go('main.results', {param:search});
     };
     
 });
