@@ -46,8 +46,6 @@ app.config( function($stateProvider, $urlRouterProvider) {
 	    resolve: {
 		results : function(ApiService, $stateParams, $q) {
 		    var d = $q.defer();
-		    console.log('hellooooo');
-		    console.log($stateParams.param);
 		    ApiService.simpleSearch({'simple_search': $stateParams.param})
 			.then(function(data) {
 			    d.resolve(data);
@@ -60,9 +58,9 @@ app.config( function($stateProvider, $urlRouterProvider) {
 	});
 });
 
-app. controller('resultsController', function($scope, $stateParams) {
-    console.log('hey!');
-    console.log($stateParams.param);
+app. controller('resultsController', function($scope, results) {
+    $scope.results = results;
+    console.log(results);
 });
 
 
