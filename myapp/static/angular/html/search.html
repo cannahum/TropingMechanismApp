@@ -1,0 +1,26 @@
+<!-- The Carousel -->
+<div class="container-fluid">
+  <h2 class="text-center">Welcome To The Troping Mechanism</h2>
+</div>
+
+<div class="container-fluid">
+  <div class="well well-lg">
+    <h2>Search Our Trope Database</h2>
+    <form novalidate class="simple-form">
+      Keywords: <input type="text" ng-model="search" required /><br />
+      <input type="submit" ng-click="makeQuery(search)" value="Search" />
+    </form>
+  </div>
+</div>
+
+<div class="row" ng-controller="carouselController">
+  <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+    <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+      <h1>[[slide.title]]</h1>
+      <h4>Slide [[slide.id]]</h4>
+      <p>[[slide.text]]</p>
+    </uib-slide>
+  </uib-carousel>
+</div>
+
+<pre>search = [[search | json]]</pre>
