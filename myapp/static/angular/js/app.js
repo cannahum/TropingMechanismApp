@@ -5,8 +5,8 @@ app.config( function($interpolateProvider, $httpProvider) {
 });
 
 app.constant('ApiEndpoint', {
-    url: 'http://localhost:36605'
-    //url: 'http://localhost:8000' // if you're running locally
+    //url: 'http://localhost:36605'
+    url: 'http://localhost:8000' // if you're running locally
 });
 
 app.config( function($stateProvider, $urlRouterProvider) {
