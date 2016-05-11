@@ -1,1 +1,9 @@
 /* write css here. */
+
+.carousel-indicators {
+    display:none;
+}
+
+.well {
+    background-color:;
+}

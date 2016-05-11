@@ -85,21 +85,56 @@ app.controller('resultsController', function($scope, $stateParams, $state, DataT
 	r.fullText = false;
 	return r;
     });
-
+    $scope.displayResults = $scope.results;
     console.log($scope.results);
     $scope.searchQuery = $stateParams.param;
+    
     $scope.charLimit = 200;
-    $scope.readMore = function(i) {
-	current = $scope.results[i].fullText;
-	$scope.results[i].fullText = !current;
+    $scope.readMore = function(title) {
+	console.log(title);
+	index = 0;
+	for (var i = 0; i < $scope.results.length; i++) {
+	    if ($scope.results[i].title == title) {
+		current = $scope.results[i].fullText;
+		$scope.results[i].fullText = !current;
+		break;
+	    };
+	};
     };
 
     $scope.tropes = true;
     $scope.media = true;
 
-    $scope.filterBy = function(result) {
-	return((result.type === "media" && $scope.media)||
-	       (result.type === "trope" && $scope.tropes));
+    function isTrope(r) {
+	return r.type == 'trope';
+    };
+
+    function isMedia(r) {
+	return r.type == 'media';
+    };
+
+    $scope.updateList = function() {
+	if ($scope.tropes && $scope.media) {
+	    $scope.displayResults = $scope.results;
+	} else if ($scope.tropes) {
+	    $scope.displayResults = $scope.results.filter(isTrope);
+	} else if ($scope.tropes) {
+	    $scope.displayResults = $scope.results.filter(isMedia);
+	} else {
+	    console.log('nothing to show');
+	    $scope.displayResults = [];
+	};
+	$scope.updatePagination();
+    };
+
+    $scope.itemsPerPage = 5;
+    $scope.totalItems = $scope.results.length;
+    $scope.currentPage = 1;
+
+    $scope.updatePagination = function () {
+	console.log($scope.currentPage);
+	var beginningIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+	$scope.displayResults = $scope.displayResults.slice(beginningIndex, beginningIndex + $scope.itemsPerPage);
     };
 
     $scope.goTo = function(title) {
