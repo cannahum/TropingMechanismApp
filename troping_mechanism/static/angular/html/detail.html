@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="well well-lg">
+    <h1 class="text-center">
+      [[obj.title]]
+    </h1>
+  </div>
+  <div ng-if="[[obj.doctype]] == 'media'">
+    <div class="col col-md-6">
+      [[obj.text]]
+    </div>
+    
+    <div class="col col-md-6">
+      Related Tropes
+      <ul>
+	<li ng-repeat="thing in obj.links">
+	  <a href="[[thing.link]]">[[thing.trope]]</a>
+	</li>
+      </ul>
+    </div>
+  </div>
+  <div ng-if="[[obj.doctype]] == 'trope'">
+    <div class="col col-md-6">
+      [[obj.text]]
+    </div>
+    
+    <div class="col col-md-6">
+      <h3>Related Links</h3>
+      <uib-accordion close-others="oneAtATime">
+	<uib-accordion-group ng-repeat="(category, otherLinks) in obj.links">
+	  <uib-accordion-heading>
+	    [[category]]
+	  </uib-accordion-heading>
+	  <ul>
+	    <li ng-repeat="(name, link) in otherLinks">
+	      <a href="[[link]]">[[name]]</a>
+	    </li>
+	  </ul>
+	</uib-accordion-group>
+      </uib-accordion>
+    </div>
+  </div>
+</div>

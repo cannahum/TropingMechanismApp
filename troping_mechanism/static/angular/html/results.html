@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="well">
+    <h1>Search Results for "[[searchQuery]]"</h1>
+    <h4>Total of [[results.length]] results</h4>
+    <div class="checkbox">
+      Filter by:
+      <label>
+        <input type="checkbox" ng-model="tropes" ng-change="updateList()">Tropes
+      </label>
+      <label>
+	<input type="checkbox" ng-model="media" ng-change="updateList()">Media
+      </label>
+    </div>
+    
+  </div>
+  <div ng-if="displayResults.length > 0">
+    <ul>
+      <li ng-repeat="result in displayResults | limitTo:itemsPerPage track by $index">
+	<div class="row">
+	  <div class="col col-md-7 col-xs-12">
+	    <h3><a href="" ng-click="goTo(result.title)">[[result.title]]</a></h3>
+	  </div>
+	  <div class="col col-md-2 col-xs-6 text-right">
+	    <h3><h4 id="score">[[result.score]]</h3></h4>
+	  </div>
+	  <div class="col col-md-3 col-xs-6 text-left">
+	    <h3><h4 id="result-type">([[getResultType(result)]])</h4></h3>
+	  </div>
+	</div>
+	<p ng-if="!result.fullText">[[result.text | limitTo:charLimit]]...<a href="" ng-click="readMore(result.title)">Read More</a></p>
+	<p ng-if="result.fullText">[[result.text]]<a href="" ng-click="readMore(result.title)">Read Less</a></p>
+	<hr />
+      </li>
+    </ul>
+  </div>
+  <div ng-if="displayResults.length < 1">
+    <h3 class="text-center">
+      Nothing to show here... Go back to the <a ui-sref="main.search">search page</a>.
+    </h3>
+  </div>
+
+  <div class="text-center">
+    <uib-pagination items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage" max-size="maxSize" ng-change="updateList()" class="pagination-sm" boundary-links="true" force-ellipses="true"></uib-pagination>
+  </div>
+</div>

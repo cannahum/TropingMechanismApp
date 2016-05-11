@@ -1,0 +1,30 @@
+/* write css here. */
+
+.carousel-indicators {
+    display:none;
+}
+
+.well {
+    background-color:;
+}
+
+#profilepic {
+    position:static;
+    max-width:70%;
+    height:auto;
+}
+
+#result-type {
+    color:red;   
+}
+
+#score {
+    color:green;
+}
+
+#big {
+    margin-top:20px;
+    width:5em;
+    height:1.5em;
+    font-size:5em;
+}
