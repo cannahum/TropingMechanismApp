@@ -1,6 +1,17 @@
 Start-Up Instructions
- - how to build the system “from scratch”, install the code, and run it.
- - Make clear any dependencies on external packages, including version. For your corpus, include commented scripts which can acquire a new corpus (assuming an ever-changing web) as well as the (compressed) static corpus data you use in your demo.
+
+How to Build the System:
+1. run 'python manager.py' to get the corpus
+2. start up ElasticSearch by navigating to where you have installed ElasticSearch and running './bin/elasticsearch'
+3. run 'python build_index.py' in order to build our index
+4. run 'python manage.py runserver' to start up the local Django server
+5. open web-browser and navigate to 'http://localhost:8000/' to see the local version of the application
+
+Dependencies on External Packages:
+- Beautiful Soup - bs4-0.0.1
+- ElasticSearch - elasticsearch-2.2.0
+- lxml - lxml-3.6.0
+- for corpus generation from tvtropes.org simply run 'python manager.py' to get the most up to date version of our corpus
 
 Purpose of each code module (file): should briefly describe the purpose of each code module (file) 
 - build_index.py
