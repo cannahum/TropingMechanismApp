@@ -1,0 +1,11 @@
+Django==1.9.5
+elasticsearch==2.3.0
+lxml==3.6.0
+mwparserfromhell==0.4.3
+nltk==3.1
+requests==2.9.1
+stop-words==2015.2.23.1
+urllib3==1.14
+virtualenv==15.0.1
+web.py==0.37
+wikitools==1.3
