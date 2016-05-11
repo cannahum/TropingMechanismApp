@@ -44,9 +44,9 @@ app.config( function($stateProvider, $urlRouterProvider) {
 		}
 	    },
 	    resolve: {
-		results : function(ApiService, $stateParams, $q) {
+		results : function(ApiService, DataTransferService, $q) {
 		    var d = $q.defer();
-		    ApiService.simpleSearch({'simple_search': $stateParams.param})
+		    ApiService.search({'search': DataTransferService.retrieveSearchParams()})
 			.then(function(data) {
 			    d.resolve(data);
 			}).catch(function(err) {
@@ -249,11 +249,13 @@ app.controller('mainController', function($scope) {
     $scope.navCollapsed = true;
 });
 
-app.controller('searchController', function($scope, $state, $q, ApiService) {
+app.controller('searchController', function($scope, $state, $q, $stateParams, ApiService, DataTransferService) {
     $scope.search = "";
-    $scope.makeQuery = function(search) {
-	console.log('ok making  a query now!');
-	$state.go('main.results', {param:search});
+    $scope.dtype = "both";
+    $scope.exactMatch = false;
+    $scope.makeQuery = function() {
+	DataTransferService.cacheSearchParams($scope.search, $scope.dtype, $scope.exactMatch);
+	$state.go('main.results', {param:$scope.search});
     };
     
 });
@@ -320,6 +322,19 @@ app.controller('carouselController', function($scope) {
 
 app.factory('DataTransferService', function($q) {
     holdingOnto = '';
+    searchParams = {};
+
+    cacheSP = function(query, dtype, exactMatch) {
+	searchParams['dtype'] = dtype;
+	searchParams['query'] = query;
+	searchParams['exactMatch'] = exactMatch;
+    };
+
+    retrieveSP = function() {
+	console.log('retrieving sp');
+	console.log(searchParams);
+	return searchParams;
+    };
 
     setData = function(obj) {
 	holdingOnto = obj;
@@ -333,7 +348,9 @@ app.factory('DataTransferService', function($q) {
 
     return {
 	cache : setData,
-	retrieve : getData
+	cacheSearchParams : cacheSP,
+	retrieve : getData,
+	retrieveSearchParams : retrieveSP
     };
 });
 
@@ -345,39 +362,7 @@ app.factory('ApiService', function($http, ApiEndpoint, $q) {
     var mediaUrl = '/media';
 
     return {
-	getTrope : function(tropeId) {
-	    var d = $q.defer();
-
-	    $http.get(ApiEndpoint.url + tropeUrl, {
-		params: {trope_id: tropeId}
-	    }).
-		success(function(data) {
-		    d.resolve(data);
-		}).
-		error(function(err) {
-		    d.reject(err);
-		});
-	    
-	    return d.promise;
-	},
-
-	getMedia : function(mediaId) {
-	    var d = $q.defer();
-
-	    $http.get(ApiEndpoint.url + mediaUrl, {
-		params: {media_id: mediaId}
-	    }).
-		success(function(data) {
-		    d.resolve(data);
-		}).
-		error(function(err) {
-		    d.reject(err);
-		});
-	    
-	    return d.promise;
-	},
-
-	simpleSearch : function(queryParams) {
+	search : function(queryParams) {
 	    var d = $q.defer();
 	    
 	    $http.get(ApiEndpoint.url + simpleSearchUrl, {

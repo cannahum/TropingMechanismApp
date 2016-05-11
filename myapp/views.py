@@ -18,6 +18,7 @@ def call_es(query):
 
 def q_phr_type(dtype, phrase):
     body={
+        "size" : 100,
         "query":{
             "filtered":{
                 "query":{
@@ -40,6 +41,7 @@ def q_phr_type(dtype, phrase):
 
 def q_phr(phrase):
     body={
+        'size' : 100,
         'query':{
             'multi_match':{
                 'query': phrase,
@@ -54,6 +56,7 @@ def q_phr(phrase):
 
 def q_mw(query):
     body={
+        'size' : 100,
         'query':{
             'multi_match':{
                 'query':query,
@@ -68,6 +71,7 @@ def q_mw(query):
 
 def q_mw_type(dtype, query):
     body={
+        'size' : 100,
         "query": {
             "filtered": {
                 "query": {
@@ -111,10 +115,18 @@ def process(res):
 
 def make_query(req):
     if req.method == 'GET':
-        print('alrighty then!')
-        print(req.GET)
-        print(req.GET[req.GET.keys()[0]])
-        res = q_phr_type('media', req.GET[req.GET.keys()[0]])
+        params = json.loads(req.GET[req.GET.keys()[0]])
+        print params
+        if params['dtype'] == 'both':
+            if params['exactMatch']:
+                res = q_phr(params['query'])
+            else:
+                res = q_mw(params['query'])
+        else:
+            if params['exactMatch']:
+                res = q_phr_type(params['dtype'], params['query'])
+            else:
+                res = q_mw_type(params['dtype'], params['query'])
         res = [process(hit) for hit in res]
         return HttpResponse(json.dumps(res), content_type='application/json')
     else:
