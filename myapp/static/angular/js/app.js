@@ -202,7 +202,7 @@ app.controller('resultsController', function($scope, $stateParams, $state, DataT
     };
 
     $scope.itemsPerPage = 5;
-    $scope.totalItems = $scope.results.length;
+    $scope.totalItems = $scope.displayResults.length;
     $scope.currentPage = 1;
 
     $scope.updatePagination = function () {
