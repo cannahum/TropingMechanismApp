@@ -9,7 +9,7 @@
     <h2>Search Our Trope Database</h2>
     <form novalidate class="simple-form">
       Keywords: <input type="text" ng-model="search" required />
-      <button ng-disabled="okToSearch()">Quick Search</button>
+      <button ng-disabled="okToSearch()" ng-click="makeQuery()">Quick Search</button>
     </form>
     <hr />
     Or Try: <a ui-sref="main.advanced">Advanced Search</a>

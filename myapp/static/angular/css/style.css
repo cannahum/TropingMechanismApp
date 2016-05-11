@@ -18,6 +18,10 @@
     color:red;   
 }
 
+#score {
+    color:green;
+}
+
 #big {
     margin-top:20px;
     width:5em;
