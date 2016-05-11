@@ -184,7 +184,7 @@ app.controller('resultsController', function($scope, $stateParams, $state, DataT
 	    $scope.displayResults = $scope.results;
 	} else if ($scope.tropes) {
 	    $scope.displayResults = $scope.results.filter(isTrope);
-	} else if ($scope.tropes) {
+	} else if ($scope.media) {
 	    $scope.displayResults = $scope.results.filter(isMedia);
 	} else {
 	    console.log('nothing to show');
