@@ -179,6 +179,14 @@ app.controller('resultsController', function($scope, $stateParams, $state, DataT
 	return r.type == 'media';
     };
 
+    $scope.getResultType = function(r) {
+	if (r.type == 'trope') {
+	    return 'Trope';
+	} else {
+	    return 'Media' + ' -> ' + r.mediatype;
+	};
+    };
+
     $scope.updateList = function() {
 	if ($scope.tropes && $scope.media) {
 	    $scope.displayResults = $scope.results;
