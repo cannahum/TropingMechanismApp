@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>Advanced Search</h1>
+    <h3>Oh, so you know your stuff...<br>Search our Database with some additional parameters</h3>
+  </div>
+</div>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col col-md-4">
+      <form novalidate class="simple-form">
+	Keywords: <input type="text" ng-model="search" required />
+      </form>
+    </div>
+    <div class="col col-md-4">
+      <div class="row">
+	<div class="btn-group">
+          <label class="btn btn-primary" ng-model="dtype" uib-btn-radio="'media'">Just Media</label>
+          <label class="btn btn-primary" ng-model="dtype" uib-btn-radio="'both'">Give me all!</label>
+          <label class="btn btn-primary" ng-model="dtype" uib-btn-radio="'trope'">Just Tropes</label>
+	</div>
+      </div>
+    </div>
+    <div class="col col-md-4">
+      <div class="checkbox">
+	<div class="row">
+	  <label>
+	    <input type="checkbox" ng-model="exactMatch" ng-change="updatePreferences()">
+	    Exact Match (or Phrase?)
+	  </label>
+	</div>
+      </div>
+    </div>
+    <div class="row text-center">
+      <button id="big" class="btn" ng-click="makeQuery()" ng-disabled="okToSearch()"><p>SEARCH</p></button>
+    </div>
+  </div>
+</div>

@@ -165,6 +165,7 @@ app.controller('detailController', function($scope, obj) {
 
 });
 
+
 app.controller('resultsController', function($scope, $stateParams, $state, DataTransferService, results) {
     $scope.results = results.map(function(r) {
 	r.fullText = false;
@@ -249,13 +250,34 @@ app.controller('mainController', function($scope) {
     $scope.navCollapsed = true;
 });
 
-app.controller('searchController', function($scope, $state, $q, $stateParams, ApiService, DataTransferService) {
+
+app.controller('advancedController', function($scope, $stateParams, $state, DataTransferService) {
+    $scope.search = '';
+    $scope.dtype = 'both';
+    $scope.exactMatch = false;
+
+    $scope.makeQuery = function() {
+	DataTransferService.cacheSearchParams($scope.search, $scope.dtype, $scope.exactMatch);
+	$state.go('main.results', {param:$scope.search});
+    };
+
+    $scope.okToSearch = function() {
+	return (!$scope.search || 0 === $scope.search.length);
+    };
+});
+
+
+app.controller('searchController', function($scope, $state, $stateParams, DataTransferService) {
     $scope.search = "";
     $scope.dtype = "both";
     $scope.exactMatch = false;
     $scope.makeQuery = function() {
 	DataTransferService.cacheSearchParams($scope.search, $scope.dtype, $scope.exactMatch);
 	$state.go('main.results', {param:$scope.search});
+    };
+
+    $scope.okToSearch = function() {
+	return (!$scope.search || 0 === $scope.search.length);
     };
     
 });

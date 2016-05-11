@@ -1,20 +1,22 @@
 <!-- The Carousel -->
 <div class="container">
   <div class="jumbotron">
-    <h1 class="text-center">Welcome To The Troping Mechanism</h1>
+    <h1 class="text-center">Welcome To The<br>Troping Mechanism</h1>
   </div>
 </div>
 
 <div class="container text-center">
-  
     <h2>Search Our Trope Database</h2>
     <form novalidate class="simple-form">
-      Keywords: <input type="text" ng-model="search" required /><br />
-      <input type="submit" ng-click="makeQuery()" value="Search" />
+      Keywords: <input type="text" ng-model="search" required />
+      <button ng-disabled="okToSearch()">Quick Search</button>
     </form>
- 
+    <hr />
+    Or Try: <a ui-sref="main.advanced">Advanced Search</a>
 </div>
 <br>
+
+<!--
 <div class="row" ng-controller="carouselController">
   <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
     <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
@@ -26,3 +28,4 @@
 </div>
 
 <pre>search = [[search | json]]</pre>
+-->

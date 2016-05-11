@@ -17,3 +17,10 @@
 #result-type {
     color:red;   
 }
+
+#big {
+    margin-top:20px;
+    width:5em;
+    height:1.5em;
+    font-size:5em;
+}
