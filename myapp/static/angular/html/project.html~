@@ -1,0 +1,5 @@
+<div class="jumbotron">
+  <h1>Our Project</h1>
+  <h4>Troping Mechanism</h4>
+  <p>This project was submitted as a final project for Information Retrieval (COSI 132a) at Brandeis University. This web application serves as a search engine on top of a preprocessed corpus of select trope data from TvTropes.org. </p>
+</div>

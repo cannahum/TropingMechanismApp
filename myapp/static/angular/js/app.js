@@ -69,7 +69,73 @@ app.config( function($stateProvider, $urlRouterProvider) {
 		    return DataTransferService.retrieve();
 		}
 	    }
+	}).
+	state('main.project', {
+	    url: "/tropingmechanism",
+	    views: {
+		"menuContent": {
+		    templateUrl: static_url + "angular/html/project.html",
+		    controller: "projectController"
+		}
+	    }
+	}).
+	state('main.team', {
+	    url: "/team",
+	    views: {
+		"menuContent": {
+		    templateUrl: static_url + "angular/html/team.html",
+		    controller: "teamController"
+		}
+	    }
+	}).
+	state('main.src', {
+	    url: "/src",
+	    views: {
+		"menuContent": {
+		    templateUrl: static_url + "angular/html/src.html",
+		    controller: "srcController"
+		}
+	    }
 	});
+});
+
+
+app.controller('projectController', function($scope) {
+    console.log('were at project');
+});
+
+app.controller('teamController', function($scope) {
+    $scope.team = [
+	{'name': 'Tiffany Chen',
+	 'school': 'Brandeis University',
+	 'degree': 'MA in Computer Science',
+	 'image': 'https://scontent-lga3-1.xx.fbcdn.net/t31.0-8/10700702_2661642614394_8787558392209421939_o.jpg',
+	 'github': 'https://github.com/tiffwchen',
+	 'website': 'http://tiffwchen.github.io/'},
+	{'name': 'Can "Jon" Nahum',
+	 'school': 'Brandeis University',
+	 'degree': 'MA in Computer Science',
+	 'image': 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/76379_10150324078935440_8297853_n.jpg?oh=485ad35125af92719a6ec1e8b4a5c2bb&oe=579B3E07',
+	 'github': 'https://github.com/cannahum',
+	 'website': 'N/A'},
+	{'name': 'Hannah Provenza',
+	 'school': 'Brandeis University',
+	 'degree': 'MA in Computational Linguistics',
+	 'image': 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/196137_8149470242_2586_n.jpg?oh=3cc9b2974a7731f3d39583d83c99b4d8&oe=57ACF82B',
+	 'github': 'https://github.com/hprovenza',
+	 'website': 'N/A'},
+	{'name': 'Vladimir Susaya',
+	 'school': 'Brandeis University',
+	 'degree': 'MA in Computer Science',
+	 'image': 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/10553331_10204334305337183_4754167646794114836_n.jpg?oh=729f960aebf93b85ccce9023f73eb567&oe=57AAA933',
+	 'github': 'https://github.com/vsusaya',
+	 'website': 'N/A'}
+    ];
+	
+});
+
+app.controller('srcController', function($scope) {
+    console.log('src!');
 });
 
 

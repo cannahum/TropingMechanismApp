@@ -8,14 +8,14 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" ui-sref="main.search">Troping Mechanism</a>
+    <a class="navbar-brand active" ui-sref="main.search">Troping Mechanism</a>
   </div>
   
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
     
     <ul class="nav navbar-nav">
-      <li class="active"><a ui-sref="main">Search</a></li>
+      <li><a ui-sref="main.search">Search</a></li>
       <li><a ui-sref="advanced">Advanced Search</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -24,9 +24,9 @@
           About <span class="caret"></span>
 	</a>
 	<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-          <li role="menuitem"><a ui-sref="project">This Project</a></li>
-          <li role="menuitem"><a ui-sref="team">The Team</a></li>
-          <li role="menuitem"><a href="http://github.com">src</a></li>
+          <li role="menuitem"><a ui-sref="main.project">This Project</a></li>
+          <li role="menuitem"><a ui-sref="main.team">The Team</a></li>
+          <li role="menuitem"><a ui-sref="main.src">src</a></li>
           <li class="divider"></li>
           <li role="menuitem"><a href="http://tvtropes.org/">TV Tropes</a></li>
 	</ul>

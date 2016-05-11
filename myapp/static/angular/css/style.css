@@ -7,3 +7,9 @@
 .well {
     background-color:;
 }
+
+#profilepic {
+    position:static;
+    max-width:70%;
+    height:auto;
+}

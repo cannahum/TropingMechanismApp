@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <h1>The Team</h1>
+    <p>Our team consists of four Brandeis University students.</p>
+  </div>
+  <div class="row" ng-repeat="member in team" style="padding-top:30px">
+    <div class="col col-md-4 text-center">
+      <img ng-src="[[member.image]]" id="profilepic">
+    </div>
+    <div class="col col-md-8 text-left">
+      <h2>[[member.name]]</h2>
+      <p>School: [[member.school]]</p>
+      <p>Degree:[[member.degree]]</p>
+      <p><a href="[[member.github]]">Github</a></p>
+      <p ng-if="member.website != 'N/A'"><a href="[[member.website]]">Website</a></p>
+    </div>
+    <br>
+  </div>
+</div>
