@@ -19,7 +19,7 @@ from django.contrib import admin
 urlpatterns = patterns(
     '',
     url(r'^$', 'myapp.views.home', name='home'),
-    url(r'^simple_search/', 'myapp.views.simple_search', name='simple_search'),
+    url(r'^simple_search/', 'myapp.views.make_query', name='make_query'),
     url(r'^advanced_search/', 'myapp.views.advanced_search', name='advanced_search'),
     url(r'^admin/', include(admin.site.urls)),
 )

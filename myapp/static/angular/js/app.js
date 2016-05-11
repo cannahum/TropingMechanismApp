@@ -142,6 +142,25 @@ app.controller('srcController', function($scope) {
 app.controller('detailController', function($scope, obj) {
     $scope.obj = obj;
     $scope.oneAtATime = true;
+
+    function reshuffle(links) {
+	var aux_genre = [];
+	var finalList = {};
+	for (var i = 0; i < links.length; i++) {
+	    var l = links[i];
+	    console.log(l);
+	    if (aux_genre.indexOf(l.genre) == -1) {
+		aux_genre.push(l.genre);
+		finalList[l.genre] = {};
+	    }
+	    finalList[l.genre][l.titleofwork] = l.link;
+	};
+	return finalList;
+    };
+    
+    if ($scope.obj.doctype == 'trope') {
+	$scope.obj.links = reshuffle($scope.obj.links);
+    }
     console.log(obj);
 
 });
@@ -172,15 +191,15 @@ app.controller('resultsController', function($scope, $stateParams, $state, DataT
     $scope.media = true;
 
     function isTrope(r) {
-	return r.type == 'trope';
+	return r.doctype == 'trope';
     };
 
     function isMedia(r) {
-	return r.type == 'media';
+	return r.doctype == 'media';
     };
 
     $scope.getResultType = function(r) {
-	if (r.type == 'trope') {
+	if (r.doctype == 'trope') {
 	    return 'Trope';
 	} else {
 	    return 'Media' + ' -> ' + r.mediatype;

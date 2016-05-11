@@ -1,0 +1,55 @@
+{
+	"mappings":{
+		"item":{
+			"properties":{
+				"text":{
+					"type": "string",
+					"analyzer": "snowball",
+					"index_options": "offsets"
+				},
+				"doctype":{
+					"type":"string"
+				},
+				"title":{
+					"type": "string",
+					"analyzer": "standard",
+					"index_options": "offsets"
+				},
+				"links":{
+					"type":"object",
+					"properties":{
+						"genre":{
+							"type":"string"
+						},
+						"titleofwork":{
+							"type":"string"
+						},
+						"link":{
+							"type":"string"
+						}
+					}		
+				},
+				"tropes":{
+					"type":"object",
+					"properties":{
+						"trope":{
+							"type":"string"
+						},
+						"link":{
+							"type":"string"
+						}
+					}
+				},
+				"imagelink":{
+					"type":"string"
+				},
+				"mediatype":{
+					"type":"string"
+				}
+			}
+		}
+	}
+}
+	
+	
+	

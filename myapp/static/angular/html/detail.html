@@ -4,21 +4,21 @@
       [[obj.title]]
     </h1>
   </div>
-  <div ng-if="[[obj.type]] == 'media'">
-    <div class="col col-lg-7">
+  <div ng-if="[[obj.doctype]] == 'media'">
+    <div class="col col-md-6">
       [[obj.text]]
     </div>
     
-    <div class="col col-lg-5">
+    <div class="col col-md-6">
       Related Tropes
       <ul>
-	<li ng-repeat="(trope, link) in obj.tropes">
-	  <a href="[[link]]">[[trope]]</a>
+	<li ng-repeat="thing in obj.links">
+	  <a href="[[thing.link]]">[[thing.trope]]</a>
 	</li>
       </ul>
     </div>
   </div>
-  <div ng-if="[[obj.type]] == 'trope'">
+  <div ng-if="[[obj.doctype]] == 'trope'">
     <div class="col col-md-6">
       [[obj.text]]
     </div>
